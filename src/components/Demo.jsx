@@ -27,6 +27,7 @@ const Demo = () => {
 
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
+  const [seen,setSeen] = useState(false);
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -46,6 +47,11 @@ const Demo = () => {
       navigator.clipboard.writeText(copyUrl);
       setTimeout(() => setCopied(false), 3000);
     };
+    // on button click the browser history will be seen
+    const handleSeen = ()=>{
+      setSeen(true);
+    }
+
     const handleKeyDown = (e) => {
       if (e.keyCode === 13) {
         handleSubmit(e);
@@ -54,9 +60,10 @@ const Demo = () => {
 
   return (
     <>
-    <section className="mt-16 w-full max-w-xl">
+    <div className="flex  w-full max-w-2xl mt-16 gap-3">
+    <section className=" w-full max-w-xl">
     {/* search */}
-    <div className="flex flex-col w-full gap-2">
+    <div className="flex flex-col  w-full gap-2">
       <form className="relative flex justify-center items-center" onSubmit={ handleSubmit}>
       <img
             src={linkIcon}
@@ -79,8 +86,15 @@ const Demo = () => {
             <p>↵</p>
           </button>
       </form>
-      {/* Browse URL history */}
-      <div className='flex flex-col gap-1 max-h-60 overflow-y-auto'>
+      </div>
+      
+     
+    </section>
+    <button className="rose_btn" onClick={handleSeen}>History</button>
+    </div>
+    <div className="w-full max-w-xl mt-5">
+     {/* Browse URL history */}
+     {seen && <div className='flex flex-col gap-1 max-h-60 overflow-y-auto '>
           {allArticles.reverse().map((item, index) => (
             <div
               key={`link-${index}`}
@@ -99,9 +113,8 @@ const Demo = () => {
               </p>
             </div>
           ))}
-        </div>
+        </div>}
     </div>
-    </section>
     {/* Display Results */}
     <div className='my-10 max-w-full flex justify-center items-center'>
     {isFetching ? (

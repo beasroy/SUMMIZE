@@ -114,3 +114,6 @@
 .summary_box {
   @apply rounded-xl border border-gray-300 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-4;
 }
+.rose_btn {
+  @apply  w-2/12 rounded-full border border-pink-700 bg-pink-700 py-1.5 px-4 text-sm text-white font-satoshi font-bold transition-all hover:bg-white hover:text-pink-700 hover:scale-105 ;
+}
